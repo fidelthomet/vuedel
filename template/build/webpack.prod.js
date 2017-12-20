@@ -10,6 +10,8 @@ const rm = require('rimraf')
 const base = require('./webpack.base')
 const _ = require('./utils')
 const config = require('./config')
+{{#prerender}}const path = require('path')
+const PrerenderSpaPlugin = require('prerender-spa-plugin'){{/prerender}}
 
 if (config.electron) {
   // remove files in dist folder in electron mode
@@ -57,6 +59,10 @@ base.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest'
   }),
+  {{#prerender}}new PrerenderSpaPlugin(
+    path.resolve(__dirname, '../dist'),
+    ['/']
+  ),{{/prerender}}
   // progressive web app
   // it uses the publicPath in webpack config
   new OfflinePlugin({

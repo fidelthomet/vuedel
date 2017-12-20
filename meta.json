@@ -31,6 +31,10 @@
       "type": "confirm",
       "message": "Do you want to use d3?"
     },
+    "prerender": {
+      "type": "confirm",
+      "message": "Do you want to prerender on build (prerender-spa-plugin)?"
+    },
     "jsx": {
       "type": "confirm",
       "message": "Generate components in JSX format?",
