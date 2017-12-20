@@ -3,7 +3,7 @@ const pkg = require('../package')
 
 module.exports = {
   title: '{{name}}',
-  port: 4000
+  port: 4000,
   // when you use electron please set to relative path like ./
   // otherwise only set to absolute path when you're using history mode
   publicPath: '{{#if electron}}.{{/if}}/',{{#if electron}}
