@@ -19,6 +19,18 @@
       "type": "confirm",
       "message": "Do you want to use ESLint?"
     },
+    "sasslint": {
+      "type": "confirm",
+      "message": "Do you want to use SASSLint?"
+    },
+    "unfetch": {
+      "type": "confirm",
+      "message": "Do you want to polyfill fetch?"
+    },
+    "d3": {
+      "type": "confirm",
+      "message": "Do you want to use d3?"
+    },
     "jsx": {
       "type": "confirm",
       "message": "Generate components in JSX format?",
@@ -42,7 +54,8 @@
     "client/views/**/*.{js,css}": "jsx",
     "app/*": "electron",
     ".eslintrc": "eslint",
+    ".sass-lint.yml": "sasslint",
     "test/e2e/*": "testcafe"
   },
-  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev{{#electron}}\n\nIn another tab:\n\n  npm run app{{/electron}}"
+  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  yarn\n  yarn run dev{{#electron}}\n\nIn another tab:\n\n  yarn run app{{/electron}}"
 }
