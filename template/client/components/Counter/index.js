@@ -2,17 +2,17 @@ import style from './style.css'
 
 export default {
   methods: {
-    increment() {
+    increment () {
       this.$store.commit('INCREMENT')
     },
-    decrement() {
+    decrement () {
       this.$store.commit('DECREMENT')
     },
-    incrementAsync() {
+    incrementAsync () {
       this.$store.dispatch('incrementAsync')
     }
   },
-  render(h) {
+  render (h) {
     return (
       <div class="counter-wrapper">
         <div class={style.counter}>

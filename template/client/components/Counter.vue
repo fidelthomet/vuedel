@@ -12,7 +12,7 @@
 <script>
 export default {
   computed: {
-    count() {
+    count () {
       return this.$store.state.options.count
     }
   }
@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style>
+@import '../styles/global';
+
 .counter {
   margin: 100px auto;
   border-radius: 3px;

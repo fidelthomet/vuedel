@@ -1,9 +1,9 @@
 import './style.css'
 
 export default {
-  render(h) {
+  render (h) {
     return (
-      <div id="app">
+      <div id='app'>
         <router-view></router-view>
       </div>
     )
