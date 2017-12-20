@@ -1,27 +1,21 @@
 'use strict'
-const fs = require('fs')
 const path = require('path')
-const chalk = require('chalk')
 const express = require('express')
 const webpack = require('webpack')
-const Server = require('webpack-dev-server')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
-const LogPlugin = require('./log-plugin')
 
 const app = express()
 
-const devServerOptions = Object.assign({}, webpackConfig.devServer, config.devServer)
-
-const host = devServerOptions.host
-const port = devServerOptions.port
-
+const port = config.port
 webpackConfig.entry.client = [
-  path.join(__dirname, '../client/dev-client.js'),
+  `webpack-hot-middleware/client?reload=true{{#electron}}&path=http://localhost:${port}/__webpack_hmr{{/electron}}`,
   webpackConfig.entry.client
 ]
+{{#electron}}
 
-webpackConfig.plugins.push(new LogPlugin({ host, port }))
+webpackConfig.output.publicPath = `http://localhost:${port}/assets/`
+{{/electron}}
 
 let compiler
 
@@ -32,13 +26,28 @@ try {
   process.exit(1)
 }
 
-const server = new Server(compiler, Object.assign({
-  noInfo: true,
-  hot: true,
-  historyApiFallback: true,
-  overlay: true,
-  disableHostCheck: true,
-  publicPath: compiler.options.publicPath
-}, devServerOptions))
+const devMiddleWare = require('webpack-dev-middleware')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  quiet: false,
+  stats: {
+    colors: true
+  }
+})
+app.use(devMiddleWare)
+app.use(require('webpack-hot-middleware')(compiler, {
+  log: () => {}
+}))
 
-server.listen(port, host)
+const mfs = devMiddleWare.fileSystem
+const file = path.join(webpackConfig.output.path, 'index.html')
+
+devMiddleWare.waitUntilValid()
+
+app.get('*', (req, res) => {
+  devMiddleWare.waitUntilValid(() => {
+    const html = mfs.readFileSync(file)
+    res.end(html)
+  })
+})
+
+app.listen(port)
