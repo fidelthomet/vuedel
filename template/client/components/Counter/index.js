@@ -16,7 +16,7 @@ export default {
     return (
       <div class="counter-wrapper">
         <div class={style.counter}>
-          {this.$store.state.count}
+          {this.$store.state.options.count}
         </div>
         <button on-click={this.increment}>Increment</button>
         <button on-click={this.decrement}>Decrement</button>

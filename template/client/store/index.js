@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import ui from 'store/ui'
 import options from 'store/options'
 /*! scaffold:import:module */
 
@@ -9,7 +8,6 @@ Vue.use(Vuex)
 
 const modules = {
   /*! scaffold:insert:module */
-  ui,
   options
 }
 

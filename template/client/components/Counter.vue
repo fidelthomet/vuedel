@@ -13,7 +13,7 @@
 export default {
   computed: {
     count() {
-      return this.$store.state.count
+      return this.$store.state.options.count
     }
   }
 }
