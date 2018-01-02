@@ -24,12 +24,12 @@ module.exports = (plop, config) => {
         type: 'modify',
         path: path.resolve(config.basePath, 'store', 'index.js'),
         pattern: /(\/\*\!\ scaffold:insert:module \*\/)/, // https://regex101.com/r/S28Wrr/1/
-        template: '$1\n  {{ moduleName }},'
+        template: '$1\n  \{{ moduleName }},'
       }, {
         type: 'modify',
         path: path.resolve(config.basePath, 'store', 'index.js'),
         pattern: /(\/\*\!\ scaffold:import:module \*\/)/, // https://regex101.com/r/TlsnLg/1/
-        template: 'import {{ moduleName }} from \'store/{{ moduleName }}\'\n$1'
+        template: 'import \{{ moduleName }} from \'store/\{{ moduleName }}\'\n$1'
       }]
 
       return actions
